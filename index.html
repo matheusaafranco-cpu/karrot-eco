@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karrot Eco - Seu Bairro Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <i class="fa-solid fa-carrot brand-icon"></i>
+                <span class="brand-title">karrot <small class="brand-tag">eco</small></span>
+            </div>
+            <div class="location-badge">
+                <i class="fa-solid fa-location-dot"></i>
+                <span id="current-neighborhood">Centro • 0.8 km</span>
+            </div>
+            <button class="btn-primary" onclick="openPublishModal()">
+                <i class="fa-solid fa-plus"></i> Desapegar
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="user-card">
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                <div class="user-info">
+                    <h4>Vizinho Eco</h4>
+                    <p class="temp-badge"><i class="fa-solid fa-fire"></i> Temp. Eco: <strong>36.5°C</strong></p>
+                </div>
+            </div>
+
+            <nav class="side-menu">
+                <button class="menu-item active" onclick="switchTab('marketplace')">
+                    <i class="fa-solid fa-store"></i> Mercado Local
+                </button>
+                <button class="menu-item" onclick="switchTab('qa')">
+                    <i class="fa-solid fa-comments"></i> Forum do Bairro
+                </button>
+                <button class="menu-item" onclick="switchTab('ai-assistant')">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA Eco
+                </button>
+            </nav>
+
+            <div class="eco-stats-card">
+                <h3><i class="fa-solid fa-leaf"></i> Impacto do Bairro</h3>
+                <div class="stat-row">
+                    <span>Itens doados/reutilizados:</span>
+                    <strong>142</strong>
+                </div>
+                <div class="stat-row">
+                    <span>Lixo eletrônico evitado:</span>
+                    <strong>85 kg</strong>
+                </div>
+                <div class="stat-row">
+                    <span>CO₂ evitado:</span>
+                    <strong>320 kg</strong>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Dynamic Content Section -->
+        <section class="content-area">
+
+            <!-- TAB 1: Marketplace -->
+            <div id="tab-marketplace" class="tab-content active">
+                <div class="category-pills">
+                    <button class="pill active" onclick="filterCategory('all')">Todos</button>
+                    <button class="pill" onclick="filterCategory('free')">🌱 Grátis / Doação</button>
+                    <button class="pill" onclick="filterCategory('electronics')">⚡ Eletrônicos / E-Waste</button>
+                    <button class="pill" onclick="filterCategory('home')">🏡 Casa e Móveis</button>
+                    <button class="pill" onclick="filterCategory('books')">📚 Livros e Jogos</button>
+                </div>
+
+                <div class="items-grid" id="items-grid">
+                    <!-- Cards de itens gerados dinamicamente via JS -->
+                </div>
+            </div>
+
+            <!-- TAB 2: Pergunta e Resposta / Fórum -->
+            <div id="tab-qa" class="tab-content">
+                <div class="qa-header">
+                    <h2>Dúvidas e Dicas da Vizinhança</h2>
+                    <p>Pergunte como descartar algo ou ajude seus vizinhos a preservar o bairro!</p>
+                </div>
+
+                <div class="ask-box">
+                    <input type="text" id="qa-input" placeholder="Ex: Onde posso descartar baterias e pilhas velhas aqui perto?">
+                    <button class="btn-primary" onclick="postQuestion()">Perguntar</button>
+                </div>
+
+                <div class="qa-feed" id="qa-feed">
+                    <!-- Perguntas e Respostas dinâmicas -->
+                </div>
+            </div>
+
+            <!-- TAB 3: Assistente IA Eco -->
+            <div id="tab-ai-assistant" class="tab-content">
+                <div class="ai-header">
+                    <div class="ai-icon"><i class="fa-solid fa-robot"></i></div>
+                    <div>
+                        <h2>Karrot Eco Assistant</h2>
+                        <p>Consulte como reciclar, calcular impacto ou ideias de reutilização de materiais.</p>
+                    </div>
+                </div>
+
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai">
+                            <i class="fa-solid fa-carrot chat-avatar"></i>
+                            <div class="message-body">
+                                Olá! Sou o assistente sustentável do Karrot. Como posso te ajudar hoje a reduzir o lixo e a poluição no seu bairro?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="ai-chat-input" placeholder="Digite sua dúvida de sustentabilidade..." onkeypress="handleKeyPress(event)">
+                        <button class="btn-primary" onclick="sendAiMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Modal de Publicação / Desapego -->
+    <div class="modal-backdrop" id="publish-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Desapegar / Anunciar Item</h3>
+                <button class="close-btn" onclick="closePublishModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label>Título do Item</label>
+                <input type="text" id="item-title" placeholder="Ex: Monitor antigo funcionando">
+
+                <label>Categoria Eco</label>
+                <select id="item-category">
+                    <option value="free">🌱 Grátis / Doação</option>
+                    <option value="electronics">⚡ Eletrônicos / E-Waste</option>
+                    <option value="home">🏡 Casa e Móveis</option>
+                    <option value="books">📚 Livros e Jogos</option>
+                </select>
+
+                <label>Preço (R$)</label>
+                <input type="number" id="item-price" placeholder="0 para Doação Grátis">
+
+                <label>Descrição</label>
+                <textarea id="item-desc" rows="3" placeholder="Conte detalhes sobre o estado do item..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closePublishModal()">Cancelar</button>
+                <button class="btn-primary" onclick="publishItem()">Publicar no Bairro</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
