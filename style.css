@@ -99,16 +99,6 @@ body {
     background-color: var(--primary-hover);
 }
 
-.btn-secondary {
-    background-color: #E9ECEF;
-    color: #495057;
-    border: none;
-    padding: 10px 18px;
-    border-radius: var(--radius);
-    font-weight: 600;
-    cursor: pointer;
-}
-
 /* Layout Principal */
 .main-layout {
     max-width: 1200px;
@@ -127,14 +117,11 @@ body {
     gap: 1.2rem;
 }
 
-.user-card, .eco-stats-card {
+.user-card {
     background: var(--card-bg);
     padding: 1.2rem;
     border-radius: var(--radius);
     border: 1px solid var(--border-color);
-}
-
-.user-card {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -188,22 +175,6 @@ body {
     color: var(--primary);
 }
 
-.eco-stats-card h3 {
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-    color: var(--eco-green);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    margin-bottom: 8px;
-}
-
 /* Conteúdo Principal */
 .content-area {
     background: var(--card-bg);
@@ -220,96 +191,52 @@ body {
     display: block;
 }
 
-/* Marketplace */
-.category-pills {
+/* Cards do Fichário */
+.pollution-cards-container {
     display: flex;
-    gap: 8px;
-    margin-bottom: 1.5rem;
-    overflow-x: auto;
-    padding-bottom: 4px;
-}
-
-.pill {
-    background: #F1F3F5;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.pill.active {
-    background: var(--primary);
-    color: white;
-}
-
-.items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    flex-direction: column;
     gap: 1.2rem;
+    margin-top: 1.2rem;
 }
 
-.item-card {
+.p-card {
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    overflow: hidden;
-    transition: transform 0.2s;
-    background: white;
-}
-
-.item-card:hover {
-    transform: translateY(-4px);
-}
-
-.item-img {
-    width: 100%;
-    height: 150px;
-    background: #E9ECEF;
+    padding: 1.2rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    color: var(--text-muted);
+    flex-direction: column;
+    gap: 8px;
 }
 
-.item-info {
-    padding: 1rem;
-}
-
-.item-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-}
-
-.item-price {
+.p-card h3 {
     font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--primary);
+    margin-bottom: 4px;
 }
 
-.item-price.free {
-    color: var(--eco-green);
+.p-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
-.item-meta {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 8px;
-    display: flex;
-    justify-content: space-between;
-}
+.border-orange { border-left: 5px solid #FF6F0F; }
+.border-blue { border-left: 5px solid #1971c2; }
+.border-green { border-left: 5px solid #2B8A3E; }
+.border-yellow { border-left: 5px solid #f59f00; }
+.border-purple { border-left: 5px solid #7048e8; }
+.border-red { border-left: 5px solid #e8590c; }
 
-/* Q&A / Fórum */
+.text-danger { color: #d9480f; }
+.text-success { color: var(--eco-green); }
+
+/* Fórum e Inputs */
 .ask-box {
     display: flex;
     gap: 10px;
     margin: 1.2rem 0;
 }
 
-.ask-box input, .chat-input-area input, .modal-body input, .modal-body select, .modal-body textarea {
+.ask-box input, .chat-input-area input {
     width: 100%;
     padding: 10px 14px;
     border: 1px solid var(--border-color);
@@ -339,7 +266,7 @@ body {
 .chat-container {
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    height: 400px;
+    height: 420px;
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
@@ -384,58 +311,31 @@ body {
     border-top: 1px solid var(--border-color);
 }
 
-/* Modal */
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.modal {
-    background: white;
-    width: 90%;
-    max-width: 480px;
-    border-radius: var(--radius);
-    padding: 1.5rem;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.modal-body {
+/* Desafios */
+.challenges-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-
-.modal-body label {
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+    gap: 12px;
     margin-top: 1.2rem;
+}
+
+.challenge-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-color);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.challenge-item input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--eco-green);
 }
 
 @media (max-width: 768px) {
